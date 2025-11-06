@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome | Tax Calculator{% endblock %}
+
+{% block content %}
+    <h1 style="text-align: center; color: var(--primary-color);">Welcome to the Tax Calculator</h1>
+    <p style="text-align: center; font-size: 1.2em; margin-bottom: 20px;">
+        Please log in or register to use the dashboard.
+    </p>
+    
+    <div class="nav-links">
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'register' %}">Register</a>
+    </div>
+{% endblock %}

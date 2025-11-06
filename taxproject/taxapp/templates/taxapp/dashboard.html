@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load humanize %} 
+
+{% block title %}Dashboard | Tax Calculator{% endblock %}
+
+{% block content %}
+    <div class="header">
+        <h2>Welcome, {{ request.user.username }}!</h2>
+        <p><a href="{% url 'logout' %}">Logout</a></p>
+    </div>
+    
+    <h3>Calculate Your Tax</h3>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Calculate</button>
+    </form>
+    
+    <hr style="margin: 20px 0;">
+    
+    {% if total_yearly_income %}
+        <div class="report">
+            <h3>Your Tax Calculation:</h3>
+            <p><strong>Total Yearly Income:</strong> <span>{{ total_yearly_income|floatformat:2|intcomma }}</span></p>
+            <p><strong>Tax-Free Allowance:</strong> <span>{{ tax_free_allowance|floatformat:2|intcomma }}</span></p>
+            <p><strong>Taxable Income:</strong> <span>{{ taxable_income|floatformat:2|intcomma }}</span></p>
+            <p><strong>Total Tax Payable:</strong> <span>{{ total_tax_payable|floatformat:2|intcomma }}</span></p>
+        </div>
+    {% else %}
+        <p>Please enter your income above to see your tax calculation.</p>
+    {% endif %}
+{% endblock %}
