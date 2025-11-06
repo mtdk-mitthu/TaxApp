@@ -17,4 +17,4 @@ COPY . /app/
 
 # Run the development server
 # We use 0.0.0.0 to listen for all connections, not just localhost
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python", "taxproject/manage.py", "runserver", "0.0.0.0:8000"]
