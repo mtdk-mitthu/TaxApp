@@ -2,7 +2,7 @@
 
 /* Global Styles */
 :root {
-    --primary-color: #d00000;
+    --primary-color: #0056b3;
     --secondary-color: #6c757d;
     --bg-color: #f8f9fa;
     --text-color: #333;
@@ -158,7 +158,7 @@ button[type="submit"]:hover {
 }
 
 .nav-links a:hover {
-    background-color: #0056b3;
+    background-color: #d00000;
     text-decoration: none;
 }
 
