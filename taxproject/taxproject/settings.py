@@ -127,4 +127,6 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-ALLOWED_HOSTS = ['98.70.98.229', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['98.70.98.229', 'mithu.my.id', 'www.mithu.my.id']
+
+STATIC_ROOT = BASE_DIR / "static"

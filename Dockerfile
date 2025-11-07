@@ -15,6 +15,10 @@ RUN pip install -r requirements.txt
 # Copy your project code into the container
 COPY . /app/
 
-# Run the development server
-# We use 0.0.0.0 to listen for all connections, not just localhost
-CMD ["python", "taxproject/manage.py", "runserver", "0.0.0.0:8000"]
+# NEW: Collect all static files (CSS, JS) into one folder
+# We must use the correct path to your manage.py
+RUN python taxproject/manage.py collectstatic --noinput
+
+# NEW: Run the Gunicorn server
+# It will run the 'wsgi.py' file located in your 'taxproject' folder
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "taxproject.wsgi:application"]
