@@ -2,7 +2,10 @@ services:
   web:
     build: .
     environment:
+      # Fix 1: Tells Django where to find settings.py
       - DJANGO_SETTINGS_MODULE=taxproject.taxproject.settings
+      # Fix 2: Tells Python where to find the 'taxapp' module
+      - PYTHONPATH=/app/taxproject
     volumes:
       - .:/app
       - static_data:/app/taxproject/staticfiles/
