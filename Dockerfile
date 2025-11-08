@@ -20,4 +20,4 @@ COPY . /app/
 RUN python taxproject/manage.py collectstatic --noinput
 
 # NEW: Run the Gunicorn server
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "taxproject.taxproject.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "taxproject.wsgi:application"]
