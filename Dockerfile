@@ -20,5 +20,4 @@ COPY . /app/
 RUN python taxproject/manage.py collectstatic --noinput
 
 # NEW: Run the Gunicorn server
-# It will run the 'wsgi.py' file located in your 'taxproject' folder
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "taxproject.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "taxproject.taxproject.wsgi:application"]
