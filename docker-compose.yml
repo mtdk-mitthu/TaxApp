@@ -1,6 +1,8 @@
 services:
   web:
     build: .
+    environment:
+      - DJANGO_SETTINGS_MODULE=taxproject.taxproject.settings
     volumes:
       - .:/app
       - static_data:/app/taxproject/staticfiles/
