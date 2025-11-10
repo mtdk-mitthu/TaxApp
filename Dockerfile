@@ -5,19 +5,21 @@ FROM python:3.11-slim
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# Set the working directory in the container
-WORKDIR /app
-
-# Install dependencies
-COPY requirements.txt /app/
-RUN pip install -r requirements.txt
-
-# Copy your project code into the container
+# Create and set the working directory
+RUN mkdir -p /app
 COPY . /app/
 
-# NEW: Collect all static files (CSS, JS) into one folder
-# We must use the correct path to your manage.py
-RUN python taxproject/manage.py collectstatic --noinput
+# Set the working directory to the project folder (where manage.py is)
+WORKDIR /app/taxproject
 
-# NEW: Run the Gunicorn server
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "taxproject.wsgi:application"]
+# Install system dependencies
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+       libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r /app/requirements.txt
+
+# This is the default command to run Gunicorn
+CMD ["gunicorn", "taxproject.wsgi:application", "--bind", "0.0.0.0:8000"]

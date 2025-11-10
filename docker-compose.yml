@@ -1,22 +1,33 @@
 services:
   web:
     build: .
-    environment:
-      - DJANGO_SETTINGS_MODULE=taxproject.taxproject.settings
-      - PYTHONPATH=/app/taxproject
+    # This command is now correct and runs from the right directory
+    command: ["gunicorn", "taxproject.wsgi:application", "--bind", "0.0.0.0:8000"]
     volumes:
       - .:/app
       - static_data:/app/taxproject/staticfiles/
+    # We remove the "ports" section here
+    # We remove the conflicting "environment" section
+    depends_on:
+      - db
 
   nginx:
     image: nginx:alpine
     ports:
-      - "80:80"
+      - "8080:80"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
       - static_data:/app/taxproject/staticfiles/
     depends_on:
       - web
 
+  db:
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
+
 volumes:
   static_data:
+  postgres_data:
