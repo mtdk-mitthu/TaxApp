@@ -40,11 +40,14 @@ INSTALLED_APPS = [
 
     'django.contrib.humanize',
     'taxapp',
+
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -119,13 +122,27 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static",
+# ]
+
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    BASE_DIR / "taxapp/static",
 ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-ALLOWED_HOSTS = ['4.240.90.135', 'mithu.my.id', 'www.mithu.my.id']
+ALLOWED_HOSTS = ['98.70.97.8', 'mithu.my.id', 'www.mithu.my.id', '127.0.0.1', 'localhost']
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1:8080',
+    'http://localhost:8080',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1:8080',
+    'http://localhost:8080',  
+]
